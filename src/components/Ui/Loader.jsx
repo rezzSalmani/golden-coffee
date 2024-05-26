@@ -2,11 +2,11 @@ import React from 'react';
 
 const Loader = () => {
   return (
-    <div class="cup">
-      <span class="steam"></span>
-      <span class="steam"></span>
-      <span class="steam"></span>
-      <div class="cup-handle"></div>
+    <div className="cup">
+      <span className="steam"></span>
+      <span className="steam"></span>
+      <span className="steam"></span>
+      <div className="cup-handle"></div>
     </div>
   );
 };

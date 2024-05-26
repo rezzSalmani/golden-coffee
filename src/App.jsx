@@ -11,11 +11,13 @@ import ContactUs from './pages/ContactUs';
 import BlogDetail from './pages/BlogDetail';
 import ProductDetail, { productDetailLoader } from './pages/ProductDetail';
 import ProductContextProvider from './store/ProductContext';
+import NotFound from './components/notFound/NotFound';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,

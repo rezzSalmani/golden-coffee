@@ -202,10 +202,10 @@ const BlogDetail = () => {
               </svg>
               آنچه در این مقاله میخوانید:
             </h6>
-            <ul className="pr-6 text-sm space-y-2 child:transition-all child:duration-150 child:flex relative">
-              {/* chevron-left to li that active */}
+            <div className="pr-6 text-sm relative font-DanaMedium">
+              {/* chevron-left to li which active */}
               <span
-                className={`absolute -right-2 text-orange-300`}
+                className={`absolute -right-2 text-orange-300 `}
                 style={{ top: `${chevronTop}px` }}
               >
                 <svg
@@ -221,28 +221,24 @@ const BlogDetail = () => {
                   />
                 </svg>
               </span>
-              <li
-                onClick={event => scrollToSection(event, 'cFirst')}
-                className={`hover:pr-3 cursor-pointer hover:text-teal-600 `}
-              >
-                مقدمه
-              </li>
-              {content.map(item => (
-                <li
-                  onClick={event => scrollToSection(event, item.id)}
-                  key={item.id}
-                  className={`hover:pr-3 cursor-pointer  hover:text-teal-600 $`}
-                >
-                  {item.subTitle}
+              <ul className="flex flex-col space-y-2 child:transition-all child:duration-200 child-hover:text-teal-700 child:w-fit child-hover:cursor-pointer">
+                <li onClick={event => scrollToSection(event, 'cFirst')}>
+                  مقدمه
                 </li>
-              ))}
-              <li
-                onClick={event => scrollToSection(event, 'cLast')}
-                className={`hover:pr-3 cursor-pointer hover:text-teal-600`}
-              >
-                سخن آخر
-              </li>
-            </ul>
+                {content.map(item => (
+                  <li
+                    onClick={event => scrollToSection(event, item.id)}
+                    key={item.id}
+                    className={`line-clamp-2`}
+                  >
+                    {item.subTitle}
+                  </li>
+                ))}
+                <li onClick={event => scrollToSection(event, 'cLast')}>
+                  سخن آخر
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
