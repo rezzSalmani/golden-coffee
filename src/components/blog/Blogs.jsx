@@ -1,6 +1,7 @@
 import React from 'react';
 import BlogItem from './BlogItem';
 import { BLOGS } from '../../BlogsData';
+import { Link } from 'react-router-dom';
 
 const Blogs = () => {
   return (
@@ -12,7 +13,10 @@ const Blogs = () => {
         <h4 className="font-MorabbaMedium  text-2xl md:text-4xl lg:text-5xl">
           مطالب خواندنی
         </h4>
-        <span className="flex items-center hover:bg-orange-200/10 transition-colors rounded-lg p-1 text-orange-300  md:text-xl cursor-pointer">
+        <Link
+          to="/blogs"
+          className="flex items-center hover:bg-orange-200/10 transition-colors rounded-lg p-1 text-orange-300  md:text-xl cursor-pointer"
+        >
           مشاهده همه <span className="hidden sm:block mr-1">مطالب</span>
           <svg
             fill="none"
@@ -27,7 +31,7 @@ const Blogs = () => {
               d="M15.75 19.5 8.25 12l7.5-7.5"
             />
           </svg>
-        </span>
+        </Link>
       </div>
       <div
         className="mt-4 md:mt-10 w-full grid grid-cols-1 sm:grid-cols-2

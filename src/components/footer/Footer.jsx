@@ -77,7 +77,7 @@ const Footer = () => {
       </div>
       {/* third section */}
       <div className="flex flex-col md:gap-2 justify-center text-center gap-4 text-xl">
-        <h6 className=" text-lg md:text-xl text-white">در تماس باشیم</h6>
+        <h6 className="text-lg md:text-xl text-white">در تماس باشیم</h6>
         <span className="flex child:flex md:items-start gap-1 justify-center text-xs sm:text-sm">
           <svg
             fill="none"
@@ -133,7 +133,7 @@ const Footer = () => {
             0902-123-6628 &nbsp; 021-6789012
           </span>
         </div>
-        <div className="flex  justify-center items-center gap-2 xl:gap-4 text-xs md:text-base font-DanaMedium text-orange-300 fill-orange-300 child:flex-all child:gap-1 child:border child:border-orange-200 child:rounded-2xl">
+        <div className="flex flex-wrap justify-center items-center gap-2 xl:gap-4 text-xs md:text-base font-DanaMedium text-orange-300 fill-orange-300 child:flex-all child:gap-1 child:border child:border-orange-200 child:rounded-2xl">
           <button className=" px-2 py-1 hover:bg-gradient-to-r from-orange-300 hover:fill-zinc-800 to-orange-200 hover:text-zinc-800 transition-all ">
             <svg
               width="22"

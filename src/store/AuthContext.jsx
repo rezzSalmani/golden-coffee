@@ -2,6 +2,7 @@ import { createContext, useEffect, useState, useContext } from 'react';
 
 import { supabase } from '../supabaseClient';
 import products from '../products';
+import { toast } from 'react-toastify';
 export const AuthContext = createContext({
   currentUser: null,
   userData: {},
@@ -35,7 +36,7 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
+      console.log(event);
       if (event === 'INITIAL_SESSION') {
         // handle initial session
       } else if (event === 'SIGNED_IN') {
@@ -178,8 +179,6 @@ const AuthContextProvider = ({ children }) => {
             throw new Error(error.message);
           } else {
             console.log('User signed in successfully');
-
-            closeModal();
           }
         } catch (error) {
           if (error.message === 'Invalid login credentials') {
@@ -196,7 +195,15 @@ const AuthContextProvider = ({ children }) => {
     }
   };
   const signOut = () => {
-    supabase.auth.signOut();
+    setIsLoading(true);
+    supabase.auth
+      .signOut()
+      .then(() => {
+        toast.success('شما با موفقیت خارج شدید', { autoClose: 2000 });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   const addToCart = async data => {
     // Check if the product is already in the cart

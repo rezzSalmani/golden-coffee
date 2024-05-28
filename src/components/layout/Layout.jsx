@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import { scrollToTop } from '../../utility/util';
 
 const Layout = () => {
+  const location = useLocation();
   useEffect(() => {
     scrollToTop();
-  }, []);
+  }, [location]);
 
   return (
     <div
-      className=" bg-gray-100 text-zinc-700 dark:text-white font-Dana dark:bg-zinc-800"
+      className="bg-gray-100 text-zinc-700 dark:text-white font-Dana dark:bg-zinc-800"
       dir="rtl"
     >
       <Header />

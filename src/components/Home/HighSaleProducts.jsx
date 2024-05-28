@@ -43,7 +43,8 @@ const HighSaleProducts = () => {
   const [highSaleProducts, setHighSaleProducts] = useState([]);
 
   useEffect(() => {
-    setHighSaleProducts(productData.filter(product => product.isPopular));
+    if (productData)
+      setHighSaleProducts(productData.filter(product => product.isPopular));
   }, [productData]);
 
   const slider = React.useRef(null);

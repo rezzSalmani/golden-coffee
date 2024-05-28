@@ -12,6 +12,7 @@ import BlogDetail from './pages/BlogDetail';
 import ProductDetail, { productDetailLoader } from './pages/ProductDetail';
 import ProductContextProvider from './store/ProductContext';
 import NotFound from './components/notFound/NotFound';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const router = createBrowserRouter([
   {
@@ -52,14 +53,18 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+const queryClient = new QueryClient();
 function App() {
   return (
-    <ProductContextProvider>
-      <AuthContextProvider>
-        <ToastContainer rtl transition={Slide} />
-        <RouterProvider router={router}></RouterProvider>
-      </AuthContextProvider>
-    </ProductContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <ProductContextProvider>
+        <AuthContextProvider>
+          <ToastContainer rtl transition={Slide} />
+          <RouterProvider router={router}></RouterProvider>
+        </AuthContextProvider>
+      </ProductContextProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Category from '../components/category/Category';
 import ProductItem from '../components/products/ProductItem';
-
-import { supabase } from '../supabaseClient';
+import Loader from '../components/Ui/Loader.jsx';
+import { useAllProduct } from '../Hooks/useProducts';
 const options = [
   {
     id: 1,
@@ -26,40 +26,57 @@ const options = [
   },
 ];
 const Shop = () => {
-  const [allProducts, setAllProducts] = useState([]);
+  const { data, isLoading } = useAllProduct();
+  const { data: products, error } = data || {};
+  const [allProducts, setAllProducts] = useState(products || []);
   const [filteredProducts, setFilter] = useState([]);
   const [option, setOption] = useState('');
   const [isError, setIsError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
+  // const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(8); // Number of products to display per page
+  const [productsPerPage] = useState(8);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  useEffect(() => {
-    const getAllProducts = async () => {
-      setIsLoading(true);
-      setIsError('');
-      try {
-        let { data, error } = await supabase.from('coffeeProducts').select('*');
-        if (error) throw new Error(error);
-        if (data) {
-          setAllProducts(data);
-          const currentProducts = data.slice(
-            indexOfFirstProduct,
-            indexOfLastProduct
-          );
 
-          setFilter(currentProducts);
-        }
-      } catch (error) {
-        setIsError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getAllProducts();
-  }, []);
+  useEffect(() => {
+    if (products) {
+      setAllProducts(products);
+      setFilter(() => products.slice(indexOfFirstProduct, indexOfLastProduct));
+    }
+    if (error && error.message === 'TypeError: Failed to fetch') {
+      return setIsError('دریافت اطلاعات موفقیت آمیز نبود.');
+    }
+    if (error) {
+      setIsError(error.message);
+    }
+    //
+    // const getAllProducts = async () => {
+    //   setIsLoading(true);
+    //   setIsError('');
+    //   try {
+    //     const { data, error } = await supabase
+    //       .from('coffeeProducts')
+    //       .select('*');
+    //     if (data) {
+    //       setAllProducts(data);
+    //       const currentProducts = data.slice(
+    //         indexOfFirstProduct,
+    //         indexOfLastProduct
+    //       );
+    //       setFilter(currentProducts);
+    //     } else if (error) {
+    //       if (error.message === 'TypeError: Failed to fetch') {
+    //         return setIsError('دریافت اطلاعات موفقیت آمیز نبود.');
+    //       }
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   } finally {
+    //     setIsLoading(false);
+    //   }
+    // };
+    // getAllProducts();
+  }, [products]);
 
   useEffect(() => {
     if (option === 'default') {
@@ -94,7 +111,6 @@ const Shop = () => {
       indexOfFirstProduct,
       indexOfLastProduct
     );
-
     setFilter(currentProducts);
   }, [currentPage, productsPerPage]);
 
@@ -167,26 +183,19 @@ const Shop = () => {
             ))}
           </select>
         </div>
-        {isError && <p className="text-sm text-center py-10">{isError}</p>}
+        {isError && (
+          <div className="border rounded-xl border-zinc-200 dark:border-zinc-700 shadow-sm mt-20">
+            <p className="text-red-500 py-8 text-sm md:text-base font-DanaBold text-center w-full">
+              {isError}
+            </p>
+          </div>
+        )}
         {isLoading ? (
-          <div className="flex-all flex-col gap-6 py-10 md:py-20">
-            <span className="animate-ping">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-12 h-12"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-                />
-              </svg>
+          <div className="flex-all flex-col gap-6 mt-40">
+            <Loader />
+            <span className="font-DanaBold text-zinc-800 md:text-xl">
+              بارگذاری محصولات...
             </span>
-            <span className="font-DanaBold text-xl">بارگذاری محصولات...</span>
           </div>
         ) : (
           <div className="grid w-full h-full grid-cols-1 gap-4 mt-4 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:gap-5 md:mt-10">
@@ -195,86 +204,87 @@ const Shop = () => {
             ))}
           </div>
         )}
-
-        <div class="flex justify-center items-center gap-4 py-10 md:py-20 dark:text-white font-DanaBold flex-wrap">
-          {/* previous button */}
-          <button
-            class="flex items-center gap-2 px-3 py-1 md:px-6 md:py-2  text-center border border-zinc-200 dark:border-zinc-600 transition-all duration-200 rounded-full select-none hover:bg-gradient-to-l from-orange-200 to-orange-300/80 hover:text-zinc-800 active:bg-orange-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"
-            onClick={() => {
-              if (currentPage > 1) {
-                setCurrentPage(currentPage - 1);
-              }
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              aria-hidden="true"
-              class="w-4 h-4"
+        {!isError && !isLoading && (
+          <div className="flex justify-center items-center gap-4 py-10 md:py-20 dark:text-white font-DanaBold flex-wrap">
+            {/* previous button */}
+            <button
+              className="flex items-center gap-2 px-3 py-1 md:px-6 md:py-2 text-center border border-zinc-200 dark:border-zinc-600 transition-all duration-200 rounded-full select-none hover:bg-gradient-to-l from-orange-200 to-orange-300/80 hover:text-zinc-800 active:bg-orange-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={() => {
+                if (currentPage > 1) {
+                  setCurrentPage(currentPage - 1);
+                }
+              }}
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              ></path>
-            </svg>
-            قبلی
-          </button>
-          <div class="flex items-center gap-2 child:border  child:border-zinc-200 child:dark:border-zinc-600 child-hover:bg-gradient-to-l from-orange-200 to-orange-300/80 child:transition-all child:duration-200 child-hover:text-zinc-800 text-xs md:text-sm">
-            {/* page numbers buttons */}
-            {Array(Math.ceil(allProducts.length / productsPerPage))
-              .fill()
-              .map((_, index) => (
-                <button
-                  key={index}
-                  class={`relative h-8 w-8 md:h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle  font-medium uppercase transition-all  disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none active:bg-orange-200 ${
-                    index + 1 === currentPage
-                      ? 'bg-orange-300 text-zinc-800'
-                      : ''
-                  }`}
-                  type="button"
-                  onClick={() => paginate(index + 1)}
-                >
-                  <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                    {index + 1}
-                  </span>
-                </button>
-              ))}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                aria-hidden="true"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                ></path>
+              </svg>
+              قبلی
+            </button>
+            <div className="flex items-center gap-2 child:border child:border-zinc-200 child:dark:border-zinc-600 child-hover:bg-gradient-to-l from-orange-200 to-orange-300/80 child:transition-all child:duration-200 child-hover:text-zinc-800 text-xs md:text-sm">
+              {/* page numbers buttons */}
+              {Array(Math.ceil(allProducts.length / productsPerPage))
+                .fill()
+                .map((_, index) => (
+                  <button
+                    key={index}
+                    className={`relative h-8  md:h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-full text-center align-middle  font-medium uppercase transition-all  disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none active:bg-orange-200 ${
+                      index + 1 === currentPage
+                        ? 'bg-orange-300 text-zinc-800'
+                        : ''
+                    }`}
+                    type="button"
+                    onClick={() => paginate(index + 1)}
+                  >
+                    <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                      {index + 1}
+                    </span>
+                  </button>
+                ))}
+            </div>
+            {/* next button */}
+            <button
+              className="flex items-center gap-2 px-3 py-1 md:px-6 md:py-2  text-center border border-zinc-200 dark:border-zinc-600 transition-all duration-200 rounded-full select-none hover:bg-gradient-to-l from-orange-200 to-orange-300/80 hover:text-zinc-800 active:bg-orange-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              onClick={() => {
+                if (
+                  currentPage < Math.ceil(allProducts.length / productsPerPage)
+                ) {
+                  setCurrentPage(currentPage + 1);
+                }
+              }}
+            >
+              بعدی
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                aria-hidden="true"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                ></path>
+              </svg>
+            </button>
           </div>
-          {/* next button */}
-          <button
-            class="flex items-center gap-2 px-3 py-1 md:px-6 md:py-2  text-center border border-zinc-200 dark:border-zinc-600 transition-all duration-200 rounded-full select-none hover:bg-gradient-to-l from-orange-200 to-orange-300/80 hover:text-zinc-800 active:bg-orange-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-            type="button"
-            onClick={() => {
-              if (
-                currentPage < Math.ceil(allProducts.length / productsPerPage)
-              ) {
-                setCurrentPage(currentPage + 1);
-              }
-            }}
-          >
-            بعدی
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              aria-hidden="true"
-              class="w-4 h-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-              ></path>
-            </svg>
-          </button>
-        </div>
+        )}
       </div>
     </section>
   );

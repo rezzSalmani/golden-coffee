@@ -4,6 +4,7 @@ import products from '../../products';
 import { supabase } from '../../supabaseClient';
 import { useProductContext } from '../../store/ProductContext';
 import Loader from '../Ui/Loader';
+import { Link } from 'react-router-dom';
 const NewestProducts = () => {
   const [showAll, setShowAll] = useState(false);
   const [displayCount, setDisplayCount] = useState(8);
@@ -28,7 +29,10 @@ const NewestProducts = () => {
             <span className="text-lg font-MorabbaLight md:text-3xl">
               فرآوری شده از دانه قهوه
             </span>
-            <span className="flex items-center p-1 text-orange-300 transition-colors rounded-lg cursor-pointer hover:bg-orange-200/10 md:text-xl">
+            <Link
+              to="/products"
+              className="flex items-center p-1 text-orange-300 transition-colors rounded-lg cursor-pointer hover:bg-orange-200/10 md:text-xl"
+            >
               مشاهده همه
               <span className="hidden mr-1 md:inline-block"> محصولات </span>
               <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -38,12 +42,12 @@ const NewestProducts = () => {
                   clipRule="evenodd"
                 />
               </svg>
-            </span>
+            </Link>
           </div>
         </div>
         {/* newest products */}
         {/* show loader */}
-        {loadingData ? (
+        {loadingData && productData.length == 0 ? (
           <div className="flex items-center justify-center mt-40">
             <Loader />
           </div>

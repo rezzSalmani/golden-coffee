@@ -4,13 +4,15 @@ import { Link, NavLink } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 import DesktopMenuCart from './DesktopMenuCart';
 import UserAuthForm from './UserAuthForm';
+import { toast } from 'react-toastify';
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isCartMobile, setIsCartMobile] = useState(false);
+  const [userProfileMenu, setUserProfileMenu] = useState(false);
 
-  const { currentUser, authFormOpen, setAuthFormIsOpen, signOut } =
+  const { currentUser, authFormOpen, setAuthFormIsOpen, signOut, isLoading } =
     useAuthContext();
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     signOut();
   };
 
@@ -41,7 +43,7 @@ const Header = () => {
           <div className="flex items-center h-full gap-2 lg:gap-4 xl:gap-9 ">
             {/* main Logo */}
             <img
-              src="./images/svgs/app-logo.svg"
+              src="/images/svgs/app-logo.svg"
               alt="Coffee Shop logo"
               className="w-9 lg:w-12 xl:w-[60px] cursor-pointer"
             />
@@ -152,7 +154,7 @@ const Header = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-8 h-8"
+                    className="w-7 h-7 lg:w-8 lg:h-8"
                   >
                     <path
                       strokeLinecap="round"
@@ -166,7 +168,7 @@ const Header = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-8 h-8"
+                    className="w-7 h-7 lg:w-8 lg:h-8"
                   >
                     <path
                       strokeLinecap="round"
@@ -179,31 +181,92 @@ const Header = () => {
             </div>
             <span className="w-[1px] h-16 bg-slate-50/20"></span>
             {currentUser ? (
-              <button
-                className="flex items-center justify-center lg:gap-2 cursor-pointer transition-colors hover:bg-orange-300/10 rounded-[100px] py-2 px-3 lg:px-4"
-                onClick={handleSignOut}
-              >
-                <svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="rotate-180 w-7 h-7 lg:w-8 lg:h-8"
+              <div className="relative">
+                <button
+                  className="flex items-center justify-center lg:gap-2 cursor-pointer transition-colors hover:bg-orange-300/10 rounded-[100px] py-2 px-3 lg:px-4"
+                  onClick={() => setUserProfileMenu(!userProfileMenu)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
-                  />
-                </svg>
-                <span className="hidden lg:inline-block xl:text-xl font-Dana ">
-                  {currentUser.user_metadata.username}
-                </span>
-              </button>
+                  <span>
+                    <svg
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="rotate-180 w-7 h-7 lg:w-8 lg:h-8"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+                      />
+                    </svg>
+                  </span>
+                  <span className="xl:text-xl font-Dana mt-1">
+                    {currentUser.user_metadata.username}
+                  </span>
+                </button>
+                <div
+                  className={`absolute -bottom-30 flex flex-col child:flex-all min-w-40 left-0 xl:left-auto child:py-4 text-zinc-800 dark:text-white bg-zinc-100 dark:bg-zinc-600 rounded-xl divide-y divide-zinc-400 transition-all ease-linear ${
+                    userProfileMenu
+                      ? 'opacity-100 visible'
+                      : 'opacity-0 invisible '
+                  }`}
+                >
+                  <div className="flex items-center gap-1 hover:md:text-emerald-600 transition-colors cursor-pointer">
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                        />
+                      </svg>
+                    </span>
+                    <span
+                      onClick={() => {
+                        setUserProfileMenu(false);
+                        toast.error('پررفایل در دسترس نمیباشد.', {
+                          autoClose: 2000,
+                        });
+                      }}
+                    >
+                      حساب کاربری
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1 text-red-500 cursor-pointer">
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-5 h-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"
+                        />
+                      </svg>
+                    </span>
+                    <button disabled={isLoading} onClick={handleSignOut}>
+                      {isLoading ? 'خروج...' : 'خروج'}
+                    </button>
+                  </div>
+                </div>
+              </div>
             ) : (
               <button
                 className="flex items-center justify-center lg:gap-2 cursor-pointer transition-colors hover:bg-orange-300/10 rounded-[100px] py-2 px-3 lg:px-4"
-                onClick={() => setAuthFormIsOpen(prev => !prev)}
+                onClick={() => setAuthFormIsOpen(true)}
               >
                 <svg
                   fill="none"
@@ -218,7 +281,6 @@ const Header = () => {
                     d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
                   />
                 </svg>
-
                 <span className="hidden lg:inline-block xl:text-xl font-Dana ">
                   ورود | ثبت‌نام
                 </span>

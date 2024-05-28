@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useAuthContext } from '../../store/AuthContext';
 import { Dialog, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 const UserAuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const {
@@ -17,12 +18,18 @@ const UserAuthForm = () => {
     resetUserData,
   } = useAuthContext();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!isLogin) {
       signUp();
+      toast.success('ثبت نام با موفقیت انجام شد', {
+        autoClose: 2000,
+      });
     } else {
-      signIn();
+      await signIn();
+      await toast.success('ورود با موفقیت انجام شد', {
+        autoClose: 2000,
+      });
     }
   };
   const changeLoginOrSignUp = () => {
@@ -91,7 +98,7 @@ const UserAuthForm = () => {
                   </span>
                 </div>
                 {isLogin ? (
-                  <form className="space-y-6 md:space-y-10">
+                  <form className="space-y-6">
                     <div className="space-y-2.5 sm:space-y-3.5">
                       <div className="relative">
                         <input
@@ -148,16 +155,34 @@ const UserAuthForm = () => {
                         </span>
                       </div>
                     </div>
-                    <button
-                      disabled={isLoading}
-                      onClick={handleSubmit}
-                      className="w-full py-1.5 md:py-3 transition-colors bg-orange-300/80 rounded-xl hover:bg-orange-300 font-DanaBold"
+                    <span
+                      className={`flex-all w-full px-4 h-4 text-sm text-center text-red-500 font-DanaBold ${
+                        isError
+                          ? 'opacity-100 visible w-full'
+                          : 'opacity-0 invisible w-0'
+                      }`}
                     >
-                      {isLoading ? 'ورود...' : 'ورود'}
-                    </button>
+                      {isError}
+                    </span>
+                    <div className="space-y-4">
+                      <button
+                        type="submit"
+                        disabled={isLoading}
+                        onClick={handleSubmit}
+                        className="w-full py-1.5 md:py-3 transition-colors bg-orange-300/80 rounded-xl hover:bg-orange-300 font-DanaBold"
+                      >
+                        {isLoading ? 'ورود...' : 'ورود'}
+                      </button>
+                      <button
+                        type="button"
+                        className="flex-all w-full py-2 mt-auto text-sm text-center shadow-sm font-DanaBold bg-zinc-200  text-zinc-700 dark:text-white border border-zinc-100 rounded-lg cursor-pointer"
+                      >
+                        بازیابی رمز عبور
+                      </button>
+                    </div>
                   </form>
                 ) : (
-                  <form className="space-y-6 md:space-y-10">
+                  <form className="space-y-6">
                     <div className="space-y-2.5 sm:space-y-3.5">
                       <div className="relative w-full h-full">
                         <input
@@ -265,6 +290,15 @@ const UserAuthForm = () => {
                         </label>
                       </div>
                     </div>
+                    <span
+                      className={`flex-all w-full px-4 h-4 text-sm text-center text-red-500 font-DanaBold ${
+                        isError
+                          ? 'opacity-100 visible w-full'
+                          : 'opacity-0 invisible w-0'
+                      }`}
+                    >
+                      {isError}
+                    </span>
                     <button
                       onClick={handleSubmit}
                       className="w-full py-1.5 md:py-3 font-DanaBold transition-colors bg-orange-300/80 rounded-xl hover:bg-orange-300"
@@ -272,20 +306,6 @@ const UserAuthForm = () => {
                       {isLoading ? 'ثبت نام...' : 'ثبت نام'}
                     </button>
                   </form>
-                )}
-                <span
-                  className={`flex-all w-full h-6 px-4  text-sm text-center text-red-500 font-DanaBold ${
-                    isError
-                      ? 'opacity-100 visible w-full'
-                      : 'opacity-0 invisible w-0'
-                  }`}
-                >
-                  {isError}
-                </span>
-                {isLogin && (
-                  <p className="flex-all py-2 mt-auto text-sm text-center shadow-md font-DanaBold text-zinc-700 dark:text-white border border-zinc-100 rounded-lg cursor-pointer">
-                    بازیابی رمز عبور
-                  </p>
                 )}
               </div>
             </div>
