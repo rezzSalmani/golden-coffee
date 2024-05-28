@@ -18,10 +18,24 @@ export const useRangeProducts = showAllProducts => {
       return await supabase.from('coffeeProducts').select('*').range(0, count);
     },
   });
-
   //   if (error) {
   //     throw error; // or return error, depending on your use case
   //   }
+  return { data, isLoading };
+};
+export const useSingleProduct = id => {
+  const { data, isLoading } = useQuery({
+    queryKey: ['singleProduct', +id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('coffeeProducts')
+        .select()
+        .eq('id', +id)
+        .single();
+      if (error) throw error; // or return error, depending on your use case
+      return data;
+    },
+  });
 
   return { data, isLoading };
 };

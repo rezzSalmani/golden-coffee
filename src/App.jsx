@@ -60,7 +60,16 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ProductContextProvider>
         <AuthContextProvider>
-          <ToastContainer rtl transition={Slide} />
+          <ToastContainer
+            rtl
+            transition={Slide}
+            autoClose={2000}
+            closeOnClick={true}
+            draggable={true}
+            theme={
+              localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light'
+            }
+          />
           <RouterProvider router={router}></RouterProvider>
         </AuthContextProvider>
       </ProductContextProvider>

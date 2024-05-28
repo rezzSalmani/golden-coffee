@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLoaderData, useNavigation } from 'react-router-dom';
+import {
+  Link,
+  useLoaderData,
+  useNavigation,
+  useParams,
+} from 'react-router-dom';
 import Breadcrumb from '../components/Ui/Breadcrumb';
 import StarRating from '../components/Ui/StarRating';
 import UserComment from '../components/Ui/UserComment';
@@ -7,42 +12,31 @@ import { Slide, toast } from 'react-toastify';
 import { useAuthContext } from '../store/AuthContext';
 import { useProductContext } from '../store/ProductContext';
 import { supabase } from '../supabaseClient';
-import { data } from 'autoprefixer';
 import { calculateDiscount } from '../utility/priceCalc';
-const commentSent = () =>
-  toast('نظر شما ارسال شد.', {
-    position: 'top-center',
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    transition: Slide,
-    theme: localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light',
-  });
-const unableToComment = () =>
-  toast('ابتدا وراد شوید', {
-    position: 'top-center',
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    transition: Slide,
-    theme: localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light',
-  });
+import { useSingleProduct } from '../Hooks/useProducts';
+import SingleProductPreloader from '../components/Ui/SingleProductPreloader';
+import SingleProductItem from '../components/products/SingleProductItem';
+
 const ProductDetail = () => {
   const navigation = useNavigation();
-  const { data } = useLoaderData();
-  console.log(data);
+  // const { data } = useLoaderData();
+  const { id } = useParams();
+  const { data, isLoading } = useSingleProduct(id);
   const [showCommentModal, setShowCommentModal] = useState(false);
   const { currentUser } = useAuthContext();
   const commentForm = useRef();
 
-  const discountedPrice = calculateDiscount(data.price, data.discountPercent);
-
+  const discountedPrice = calculateDiscount(data?.price, data?.discountPercent);
+  const handleCommentSubmit = e => {
+    e.preventDefault();
+    if (currentUser) {
+      toast.success('نظر شما ارسال شد.');
+      setShowCommentModal(perv => !perv);
+      e.target.reset();
+    } else {
+      toast.error('ابتدا وراد شوید');
+    }
+  };
   return (
     <section className="flex flex-col container py-10 md:py-20 ">
       {navigation.state === 'loading' ? (
@@ -81,47 +75,26 @@ const ProductDetail = () => {
               </Breadcrumb>
               <Breadcrumb>
                 <Link to={'/products'} className="whitespace-nowrap">
-                  {data.category}
+                  {data?.category}
                 </Link>
               </Breadcrumb>
               <Breadcrumb>
-                <Link to={`/products/${data.id}`} className="whitespace-nowrap">
-                  {data.title}
+                <Link
+                  to={`/products/${data?.id}`}
+                  className="whitespace-nowrap"
+                >
+                  {data?.title}
                 </Link>
               </Breadcrumb>
             </div>
           </div>
           {/* product detail */}
-          <div className=" flex justify-between flex-col-reverse sm:flex-row items-center gap-4 lg:child:w-1/2 py-10">
-            <div className="flex flex-col gap-5 w-full">
-              <div className="flex justify-between items-center gap-4 dark:text-white">
-                <h3 className="font-MorabbaMedium sm:text-lg md:text-2xl xl:text-3xl">
-                  {data.title}
-                </h3>
-                <div className="flex flex-col text-center">
-                  <span className="text-sm sm:text-base xl:text-lg font-DanaBold">
-                    {discountedPrice}{' '}
-                    <span className="text-xs md:text-sm">تومان</span>
-                  </span>
-                  <span className="line-through text-xs md:text-sm text-gray-500">
-                    {data.price}{' '}
-                    <span className="text-xs md:text-sm">تومان</span>
-                  </span>
-                </div>
-              </div>
-              <p className="text-justify text-xs sm:text-sm md:text-base text-gray-900 dark:text-gray-200">
-                {data.description}
-              </p>
-              <StarRating initStar={3} />
-            </div>
-            <div className="flex justify-center h-full w-2/5 lg:w-1/2">
-              <img
-                src={data.image}
-                alt={data.title}
-                className="drop-shadow-xl max-w-[300px] max-h-[300px]"
-              />
-            </div>
-          </div>
+          {isLoading ? (
+            <SingleProductPreloader />
+          ) : (
+            <SingleProductItem data={data} discountedPrice={discountedPrice} />
+          )}
+
           {/* comment section */}
           <div className="bg-white dark:bg-zinc-700 text-zinc-800 dark:text-white p-5 rounded-xl shadow-main">
             <div className="flex items-center gap-2 justify-between">
@@ -152,7 +125,7 @@ const ProductDetail = () => {
               </button>
               {/* send comment form */}
               <div
-                className={`fixed  inset-0 my-auto mx-auto bg-white dark:bg-zinc-600 h-fit rounded-xl py-4 md:py-6 px-4 space-y-6 shadow-main drop-shadow-md transition-all duration-150 z-20 ${
+                className={`fixed inset-0 my-auto mx-auto bg-white dark:bg-zinc-600 h-fit rounded-xl py-4 md:py-6 px-4 space-y-6 shadow-main drop-shadow-md transition-all duration-150 z-40 ${
                   showCommentModal
                     ? ' w-2/3 sm:w-2/4 md:w-1/2 lg:w-[400px] visible opacity-100'
                     : 'w-0 invisible opacity-0'
@@ -185,17 +158,7 @@ const ProductDetail = () => {
                 </h6>
                 <form
                   ref={commentForm}
-                  action=""
-                  onSubmit={e => {
-                    e.preventDefault();
-                    if (currentUser) {
-                      commentSent();
-                      setShowCommentModal(perv => !perv);
-                      e.target.reset();
-                    } else {
-                      unableToComment();
-                    }
-                  }}
+                  onSubmit={handleCommentSubmit}
                   className="text-zinc-800 dark:text-white space-y-4 md:px-4"
                 >
                   <div className="flex flex-col text-sm xs:text-base md:text-lg space-y-2">
@@ -232,7 +195,7 @@ const ProductDetail = () => {
                 </form>
               </div>
               <div
-                className={`fixed inset-0 z-10 transition-all bg-black  bg-opacity-10 ${
+                className={`fixed inset-0 z-30 transition-all bg-black bg-opacity-10 ${
                   showCommentModal
                     ? 'visible opacity-100 '
                     : 'invisible opacity-0 overlay'
@@ -257,7 +220,6 @@ export default ProductDetail;
 
 export const productDetailLoader = async ({ params }) => {
   const { id: productId } = params;
-
   const { data, error } = await supabase
     .from('coffeeProducts')
     .select()

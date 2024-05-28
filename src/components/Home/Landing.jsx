@@ -2,8 +2,8 @@ import React from 'react';
 const Landing = () => {
   return (
     <section className="home relative h-[250px] xs:h-auto w-full aspect-[2/1] md:aspect-auto bg-home-mobile md:bg-home-desktop bg-no-repeat bg-cover bg-[center_top]">
-      <div className="container relative flex items-center justify-end overflow-y-hidden h-full md:min-h-screen ">
-        <div className=" text-white sm:space-y-4 md:space-y-8  justify-center ">
+      <div className="container relative flex items-center justify-end h-full overflow-y-hidden  md:min-h-screen ">
+        <div className=" text-white sm:space-y-4 md:space-y-8   justify-center ">
           <div className="">
             <h1 className="font-MorabbaBold text-xl sm:text-2xl md:text-6xl/[62px] mb-0.5 md:mb-2">
               قهوه عربیکا تانزانیا
@@ -25,13 +25,13 @@ const Landing = () => {
         </span>
       </div>
       {/* circle */}
-      <span className="absolute bottom-0  right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px]">
+      <span className="absolute -bottom-1 right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px] ">
         <svg viewBox="0 0 100 22" fill="currentColor">
           <path d="M50 0C69 0 81 22 100 22L0 22C18.75 22 31 0 50 0Z"></path>
         </svg>
       </span>
       {/* arrow down */}
-      <div className="absolute bottom-0 right-0 left-0 mx-auto w-[30px] h-[30px] hidden md:flex-all dark:text-white text-zinc-700 translate-y-2/4 border-2 rounded-full border-orange-300">
+      <div className="absolute bottom-0 right-0 left-0 mx-auto w-[30px] h-[30px] hidden md:flex-all dark:text-white text-zinc-700 translate-y-2/4 border-2 rounded-full border-orange-300 ">
         <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
           <path
             fillRule="evenodd"

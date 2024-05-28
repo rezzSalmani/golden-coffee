@@ -29,7 +29,7 @@ const Blog = () => {
         </div>
         {/* scroll down */}
         <div className="relative">
-          <span className="absolute bottom-0  right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px]">
+          <span className="absolute -bottom-1 right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px]">
             <svg viewBox="0 0 100 22" fill="currentColor">
               <path d="M50 0C69 0 81 22 100 22L0 22C18.75 22 31 0 50 0Z"></path>
             </svg>

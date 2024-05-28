@@ -47,12 +47,6 @@
   .submenu__item--active {
     @apply relative text-orange-300 pr-2.5 transition-all duration-200;
   }
-  /* .submenu {
-    @apply flex flex-col invisible h-0 pr-8 text-sm transition-all opacity-0 gap-y-3;
-  }
-  .submenu--open {
-    @apply visible h-full mt-3 opacity-100;
-  } */
   .overlay {
     @apply fixed inset-0 z-10 invisible w-full h-full transition-all opacity-0 md:hidden bg-black/40;
   }
