@@ -175,7 +175,7 @@ const UserAuthForm = () => {
                       </button>
                       <button
                         type="button"
-                        className="flex-all w-full py-2 mt-auto text-sm text-center shadow-sm font-DanaBold bg-zinc-200  text-zinc-700 dark:text-white border border-zinc-100 rounded-lg cursor-pointer"
+                        className="flex-all w-full py-2 mt-auto text-sm text-center shadow-sm font-DanaBold bg-zinc-200  text-zinc-700 border border-zinc-100 rounded-lg cursor-pointer"
                       >
                         بازیابی رمز عبور
                       </button>

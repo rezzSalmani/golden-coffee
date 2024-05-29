@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import MobileMenuItem from './MobileMenuItem';
 import MobileCartMenu from './MobileCartMenu';
 import { useAuthContext } from '../../store/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const MobileMenu = ({
   setIsCartMobile,
   setIsMobileMenu,
@@ -13,9 +13,14 @@ const MobileMenu = ({
   darkMode,
   setDarkMode,
 }) => {
+  const location = useLocation();
   const [subMenuMobile, setSubMenuMobile] = useState(false);
   const { currentUser } = useAuthContext();
   const { setAuthFormIsOpen } = useAuthContext();
+  useEffect(() => {
+    setIsMobileMenu(false);
+  }, [location]);
+
   return (
     <div className=" flex items-center justify-between w-full h-16 px-6 bg-white md:hidden dark:bg-zinc-700 dark:text-white z-30 ">
       {/* menu hamburger*/}

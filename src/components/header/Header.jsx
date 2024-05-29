@@ -5,18 +5,21 @@ import MobileMenu from './MobileMenu';
 import DesktopMenuCart from './DesktopMenuCart';
 import UserAuthForm from './UserAuthForm';
 import { toast } from 'react-toastify';
+
+import { useClickOutSide } from '../../Hooks/useClickOutSide';
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isCartMobile, setIsCartMobile] = useState(false);
   const [userProfileMenu, setUserProfileMenu] = useState(false);
-
+  const userProfileRef = useRef();
   const { currentUser, authFormOpen, setAuthFormIsOpen, signOut, isLoading } =
     useAuthContext();
   const handleSignOut = async () => {
     signOut();
   };
-
+  useClickOutSide(() => setUserProfileMenu(false), userProfileRef);
   // handle Dark Mode
+
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem('darkMode') === 'true'
   );
@@ -206,6 +209,7 @@ const Header = () => {
                   </span>
                 </button>
                 <div
+                  ref={userProfileRef}
                   className={`absolute -bottom-30 flex flex-col child:flex-all min-w-40 left-0 xl:left-auto child:py-4 text-zinc-800 dark:text-white bg-zinc-100 dark:bg-zinc-600 rounded-xl divide-y divide-zinc-400 transition-all ease-linear ${
                     userProfileMenu
                       ? 'opacity-100 visible'
@@ -301,7 +305,7 @@ const Header = () => {
       {/* overlay */}
       <div
         className={`fixed inset-0 z-20 h-full w-full bg-black/30 transition-all ${
-          isCartMobile || isMobileMenu || authFormOpen
+          isCartMobile || isMobileMenu || authFormOpen || userProfileMenu
             ? 'visible opacity-100'
             : 'invisible opacity-0'
         }`}

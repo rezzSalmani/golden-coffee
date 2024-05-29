@@ -98,7 +98,7 @@
         rgba(0, 0, 0, 0.6) 33.85%,
         rgba(0, 0, 0, 0.1) 100%
       ),
-      url(./images/categories/category-right.jpg);
+      url(/images/categories/category-right.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -110,7 +110,7 @@
         rgba(0, 0, 0, 0.6) 33.85%,
         rgba(0, 0, 0, 0.1) 100%
       ),
-      url(./images/categories/category-left.jpg);
+      url(/images/categories/category-left.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -194,28 +194,6 @@
   }
   .custom-radius {
     border-radius: 0% 0% 50% 50% / 25% 25% 7% 7%;
-  }
-  .breadcrumb {
-    /* display: flex;
-    height: 3.25rem;
-    align-items: center;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0.75rem;
-    border-width: 1px;
-    --tw-border-opacity: 1;
-    border-color: rgb(245 245 245 / var(--tw-border-opacity));
-    --tw-bg-opacity: 1;
-    background-color: rgb(255 255 255 / var(--tw-bg-opacity)); */
-  }
-  .breadcrumb__item {
-    /* position: relative;
-    display: flex;
-    height: 100%;
-    flex-shrink: 0;
-    align-items: center;
-    padding-left: 0.5rem;
-    padding-right: 38px; */
   }
   .breadcrumb__item:after,
   .breadcrumb__item:before {

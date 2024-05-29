@@ -3,18 +3,17 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ProductItem from '../products/ProductItem';
-import products from '../../products';
 import { useProductContext } from '../../store/ProductContext';
 const settings = {
   dots: false,
   infinite: true,
   slidesToShow: 4,
-  slidesToScroll: 1,
+  slidesToScroll: 3,
   centerMode: true,
   centerPadding: '8px',
   autoplay: true,
   speed: 1000,
-  autoplaySpeed: 4000,
+  autoplaySpeed: 3000,
   cssEase: 'linear',
   pauseOnHover: true,
   responsive: [

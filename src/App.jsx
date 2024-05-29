@@ -9,7 +9,7 @@ import Blog from './pages/Blog';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import BlogDetail from './pages/BlogDetail';
-import ProductDetail, { productDetailLoader } from './pages/ProductDetail';
+import ProductDetail from './pages/ProductDetail';
 import ProductContextProvider from './store/ProductContext';
 import NotFound from './components/notFound/NotFound';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path: 'products/:id',
         element: <ProductDetail />,
-        loader: productDetailLoader,
+        // loader: productDetailLoader,
       },
       {
         path: 'blogs',

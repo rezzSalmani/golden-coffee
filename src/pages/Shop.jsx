@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Category from '../components/category/Category';
 import ProductItem from '../components/products/ProductItem';
 import Loader from '../components/Ui/Loader.jsx';
@@ -32,12 +32,17 @@ const Shop = () => {
   const [filteredProducts, setFilter] = useState([]);
   const [option, setOption] = useState('');
   const [isError, setIsError] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(8);
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
+  const indexOfLastProduct = useMemo(
+    () => currentPage * productsPerPage,
+    [currentPage, productsPerPage]
+  );
+  const indexOfFirstProduct = useMemo(
+    () => indexOfLastProduct - productsPerPage,
+    [indexOfLastProduct, productsPerPage]
+  );
   useEffect(() => {
     if (products) {
       setAllProducts(products);
@@ -49,34 +54,7 @@ const Shop = () => {
     if (error) {
       setIsError(error.message);
     }
-    //
-    // const getAllProducts = async () => {
-    //   setIsLoading(true);
-    //   setIsError('');
-    //   try {
-    //     const { data, error } = await supabase
-    //       .from('coffeeProducts')
-    //       .select('*');
-    //     if (data) {
-    //       setAllProducts(data);
-    //       const currentProducts = data.slice(
-    //         indexOfFirstProduct,
-    //         indexOfLastProduct
-    //       );
-    //       setFilter(currentProducts);
-    //     } else if (error) {
-    //       if (error.message === 'TypeError: Failed to fetch') {
-    //         return setIsError('دریافت اطلاعات موفقیت آمیز نبود.');
-    //       }
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   } finally {
-    //     setIsLoading(false);
-    //   }
-    // };
-    // getAllProducts();
-  }, [products]);
+  }, [data]);
 
   useEffect(() => {
     if (option === 'default') {

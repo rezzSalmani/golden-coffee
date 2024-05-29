@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import ProductItem from '../products/ProductItem';
-import products from '../../products';
-import { supabase } from '../../supabaseClient';
 import { useProductContext } from '../../store/ProductContext';
 import Loader from '../Ui/Loader';
 import { Link } from 'react-router-dom';
 const NewestProducts = () => {
-  const [showAll, setShowAll] = useState(false);
-  const [displayCount, setDisplayCount] = useState(8);
   const {
     errorLoadingData,
     productData,
@@ -45,13 +41,13 @@ const NewestProducts = () => {
             </Link>
           </div>
         </div>
-        {/* newest products */}
         {/* show loader */}
         {loadingData && productData.length == 0 ? (
           <div className="flex items-center justify-center mt-40">
             <Loader />
           </div>
         ) : (
+          // * newest products
           <div className="grid w-full h-full grid-cols-1 gap-4 mt-4 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:gap-5 md:mt-10 ">
             {productData &&
               productData.map(product => (
@@ -59,6 +55,7 @@ const NewestProducts = () => {
               ))}
           </div>
         )}
+        {/* handle errors */}
         {errorLoadingData && (
           <div className="border rounded-xl border-zinc-200 dark:border-zinc-700 shadow-sm">
             <p className="text-red-500 py-8 text-sm md:text-base font-DanaBold text-center w-full">

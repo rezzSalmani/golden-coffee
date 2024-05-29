@@ -3,30 +3,7 @@ import { Link } from 'react-router-dom';
 import StarRating from '../Ui/StarRating';
 import { toast } from 'react-toastify';
 import { useAuthContext } from '../../store/AuthContext';
-const addedToast = () =>
-  toast('محصول به سبد خرید اضافه شد', {
-    position: 'top-right',
-    autoClose: 2000,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    type: 'success',
-    hideProgressBar: true,
-    theme: localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light',
-  });
-const unableToAdd = () =>
-  toast('لطفا ابتدا وارد حساب کاربری خود شوید', {
-    position: 'top-right',
-    autoClose: 2000,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    type: 'error',
-    hideProgressBar: true,
-    theme: localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light',
-  });
+
 const ProductItem = props => {
   const {
     id,
@@ -53,7 +30,7 @@ const ProductItem = props => {
 
   const handleAddToCart = () => {
     if (currentUser) {
-      addedToast();
+      toast.success('محصول به سبد خرید اضافه شد');
       addToCart({
         id,
         title,
@@ -64,7 +41,7 @@ const ProductItem = props => {
         quantity,
       });
     } else {
-      unableToAdd();
+      toast.error('لطفا ابتدا وارد حساب کاربری خود شوید');
     }
   };
   return (
@@ -166,7 +143,9 @@ const ProductItem = props => {
       </div>
       {/* mobile Ui */}
       <div className="flex p-2 overflow-hidden bg-white xs:hidden dark:bg-zinc-700 rounded-2xl shadow-main">
-        <img src={image} alt={title} className="object-cover w-32" />
+        <Link to={`/products/${id}`} className="my-auto">
+          <img src={image} alt={title} className="object-cover w-32" />
+        </Link>
         <div className="flex flex-col w-full h-full gap-4">
           {/* discount and rating */}
           <div className="flex justify-between">
@@ -182,9 +161,11 @@ const ProductItem = props => {
               <StarRating classes="" initStar={rating} />
             </div>
           </div>
-          <h4 className="text-sm font-DanaMedium text-zinc-700 dark:text-white">
-            {title}
-          </h4>
+          <Link to={`/products/${id}`}>
+            <h4 className="text-sm font-DanaMedium text-zinc-700 dark:text-white">
+              {title}
+            </h4>
+          </Link>
           <div className="flex items-end h-full">
             <div className="flex flex-wrap items-center justify-start space-x-2 w-full font-DanaBold text-teal-600 dark:text-emerald-500 h-[45px]">
               {isAvailable ? (

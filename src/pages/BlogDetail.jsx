@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Breadcrumb from '../components/Ui/Breadcrumb';
 import { BLOGS } from '../BlogsData';
 import { Link, useParams } from 'react-router-dom';
 
 const BlogDetail = () => {
-  const [helperActive, sethHelperActive] = useState('cFirst');
-  const [chevronTop, setChevronTop] = useState(0);
   const { id: blogId } = useParams();
+  const [blog, setBlog] = useState(null);
+  const [chevronTop, setChevronTop] = useState(0);
+
+  useEffect(() => {
+    const foundBlog = BLOGS.find(item => item.id === blogId);
+    if (foundBlog) {
+      setBlog(foundBlog);
+    }
+  }, [blogId]);
+  const scrollToSection = (event, id) => {
+    const liElement = event.currentTarget;
+    const liTopPosition = liElement.offsetTop;
+    setChevronTop(liTopPosition);
+    const element = document.getElementById(id);
+    const y = element.getBoundingClientRect().top + window.pageYOffset - 172;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  };
+
+  if (!blog) {
+    return <div>Loading...</div>;
+  }
 
   const {
     id,
@@ -21,18 +40,8 @@ const BlogDetail = () => {
     bgImage,
     bgImage2,
     content,
-  } = BLOGS.find(item => item.id === blogId);
+  } = blog;
 
-  const scrollToSection = (event, id) => {
-    const liElement = event.currentTarget;
-    const liTopPosition = liElement.offsetTop;
-    setChevronTop(liTopPosition);
-
-    sethHelperActive(id);
-    const element = document.getElementById(id);
-    const y = element.getBoundingClientRect().top + window.pageYOffset - 172;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  };
   return (
     <section className="container py-10 md:py-20">
       {/* Breadcrumb */}
@@ -242,9 +251,6 @@ const BlogDetail = () => {
           </div>
         </div>
       </div>
-      {/* <div className="fixed top-0 w-full h-full">
-        <img src={bg} alt="" className="z-10" />
-      </div> */}
     </section>
   );
 };

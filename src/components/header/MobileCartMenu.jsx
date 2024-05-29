@@ -15,7 +15,7 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
     <div
       className={`fixed left-0 top-0 bottom-0 min-h-screen flex flex-col bg-white divide-y divide-white/10 dark:bg-zinc-700 transition-all z-30 overflow-y-auto text-zinc-700 dark:text-white py-3 px-4 ${
         isCartMobile
-          ? 'w-3/4 xs:w-3/5 sm:w-2/5 visible opacity-100'
+          ? 'w-full xs:w-3/5 sm:w-2/4 visible opacity-100'
           : 'w-0 opacity-0 invisible'
       }`}
     >
@@ -42,24 +42,21 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
         <span className="font-DanaMedium">سبد خرید</span>
       </div>
       {/* cart body */}
-      <div className="pt-5">
+      <div className="pt-5 space-y-2 first:border-b">
         {userCart
           ? userCart.map(item => (
-              <div key={item.id} className="flex items-center">
+              <div key={item.id} className="flex items-center w-full">
                 <img
                   src={item.image}
                   alt="Product Image"
                   className="w-[90px]"
                 />
-                <div>
+                <div className="space-y-2 w-full">
                   <h4 className="text-sm font-DanaMedium line-clamp-2">
                     {item.title}
                   </h4>
-                  <div className="flex flex-wrap items-end justify-between">
+                  <div className="flex items-end justify-between gap-2">
                     <div className="text-xs child:block">
-                      <span className="text-teal-600 tracking-tightest">
-                        {item.discountAmount.toLocaleString()} تومان تخفیف
-                      </span>
                       <span>
                         <span className="text-base font-DanaBold">
                           {' '}
@@ -68,16 +65,18 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
                         تومان
                       </span>
                     </div>
-                    <div className="flex items-center justify-end gap-3 text-sm">
+                    <div className="flex items-center justify-end gap-1 child:flex-all text-sm ">
                       <span
-                        className="cursor-pointer"
+                        className="rounded-full bg-zinc-300  px-2 pt-1 cursor-pointer dark:text-zinc-700"
                         onClick={() => addToCart(item)}
                       >
                         +
                       </span>
-                      <span className="font-bold">{item.cartQuantity}</span>
+                      <span className="font-bold pt-1 w-4">
+                        {item.cartQuantity}
+                      </span>
                       <span
-                        className="cursor-pointer"
+                        className="rounded-full bg-zinc-300  px-2 pt-1 cursor-pointer dark:text-zinc-700"
                         onClick={() => removeFromCart(item.id)}
                       >
                         -
