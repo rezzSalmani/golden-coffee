@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuthContext } from '../../store/AuthContext';
 import { calculateTotalPrice } from '../../utility/priceCalc';
+import { useClickOutSide } from '../../Hooks/useClickOutSide';
+import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
 
 const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
   const { isLoading, removeFromCart, addToCart, userCart } = useAuthContext();
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const cartMobileRef = useRef();
+  useClickOutSide(() => setIsCartMobile(false), cartMobileRef);
+  useRemoveScroll(isCartMobile);
+
   useEffect(() => {
     if (userCart) {
       const totalPrice = calculateTotalPrice(userCart);
@@ -13,6 +19,7 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
   }, [userCart]);
   return (
     <div
+      ref={cartMobileRef}
       className={`fixed left-0 top-0 bottom-0 min-h-screen flex flex-col bg-white divide-y divide-white/10 dark:bg-zinc-700 transition-all z-30 overflow-y-auto text-zinc-700 dark:text-white py-3 px-4 ${
         isCartMobile
           ? 'w-full xs:w-3/5 sm:w-2/4 visible opacity-100'

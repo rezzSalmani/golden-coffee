@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ProductItem from '../products/ProductItem';
 import { useProductContext } from '../../store/ProductContext';
+import Loader from '../Ui/Loader';
 const settings = {
   dots: false,
   infinite: true,
@@ -98,13 +99,19 @@ const HighSaleProducts = () => {
           </div>
         </div>
       </div>
-      <Slider ref={slider} {...settings} arrows={false} className="py-6">
-        {highSaleProducts.map(product => (
-          <div dir="rtl" className="px-2" key={product.id}>
-            <ProductItem {...product} />
-          </div>
-        ))}
-      </Slider>
+      {!productData.length ? (
+        <div className="flex items-center justify-center mt-40">
+          <Loader />
+        </div>
+      ) : (
+        <Slider ref={slider} {...settings} arrows={false} className="py-6">
+          {highSaleProducts.map(product => (
+            <div dir="rtl" className="px-2" key={product.id}>
+              <ProductItem {...product} />
+            </div>
+          ))}
+        </Slider>
+      )}
     </div>
   );
 };

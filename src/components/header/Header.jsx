@@ -7,17 +7,22 @@ import UserAuthForm from './UserAuthForm';
 import { toast } from 'react-toastify';
 
 import { useClickOutSide } from '../../Hooks/useClickOutSide';
+import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
 const Header = () => {
   const [isMobileMenu, setIsMobileMenu] = useState(false);
   const [isCartMobile, setIsCartMobile] = useState(false);
   const [userProfileMenu, setUserProfileMenu] = useState(false);
   const userProfileRef = useRef();
+
+  useRemoveScroll(userProfileMenu);
+
   const { currentUser, authFormOpen, setAuthFormIsOpen, signOut, isLoading } =
     useAuthContext();
   const handleSignOut = async () => {
     signOut();
   };
   useClickOutSide(() => setUserProfileMenu(false), userProfileRef);
+
   // handle Dark Mode
 
   const [darkMode, setDarkMode] = useState(

@@ -1,28 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 
 import MobileMenuItem from './MobileMenuItem';
 import MobileCartMenu from './MobileCartMenu';
 import { useAuthContext } from '../../store/AuthContext';
 import { Link, useLocation } from 'react-router-dom';
-const MobileMenu = ({
-  setIsCartMobile,
-  setIsMobileMenu,
-  isMobileMenu,
-  isCartMobile,
-  handleSignOut,
-  darkMode,
-  setDarkMode,
-}) => {
+import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
+import { useClickOutSide } from '../../Hooks/useClickOutSide';
+const MobileMenu = forwardRef(function (
+  {
+    setIsCartMobile,
+    setIsMobileMenu,
+    isMobileMenu,
+    isCartMobile,
+    handleSignOut,
+    darkMode,
+    setDarkMode,
+  },
+  ref
+) {
   const location = useLocation();
   const [subMenuMobile, setSubMenuMobile] = useState(false);
   const { currentUser } = useAuthContext();
   const { setAuthFormIsOpen } = useAuthContext();
+  const mobileMenuRef = useRef();
+  useRemoveScroll(isMobileMenu);
+  useClickOutSide(() => setIsMobileMenu(false), mobileMenuRef);
+
   useEffect(() => {
     setIsMobileMenu(false);
   }, [location]);
 
   return (
-    <div className=" flex items-center justify-between w-full h-16 px-6 bg-white md:hidden dark:bg-zinc-700 dark:text-white z-30 ">
+    <div
+      className=" flex items-center justify-between w-full h-16 px-6 bg-white md:hidden dark:bg-zinc-700 dark:text-white z-30"
+      ref={ref}
+    >
       {/* menu hamburger*/}
       <div>
         <span
@@ -45,6 +57,7 @@ const MobileMenu = ({
         </span>
         {/* mobile menu*/}
         <div
+          ref={mobileMenuRef}
           className={`fixed space-y-4 xs:space-y-6 p-4 top-0 right-0 bg-white h-screen  divide-y divide-zinc-200 dark:divide-gray-100/10 dark:bg-zinc-700 transition-all z-30 overflow-y-auto ${
             isMobileMenu
               ? 'w-2/3 xs:w-3/6 sm:w-2/5 visible opacity-100'
@@ -366,6 +379,6 @@ const MobileMenu = ({
       </div>
     </div>
   );
-};
+});
 
 export default MobileMenu;

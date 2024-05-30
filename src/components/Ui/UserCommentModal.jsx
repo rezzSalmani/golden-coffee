@@ -1,14 +1,18 @@
 import React, { useRef } from 'react';
+import { useClickOutSide } from '../../Hooks/useClickOutSide';
 
 const UserCommentModal = ({
   showCommentModal,
   setShowCommentModal,
   handleCommentSubmit,
 }) => {
+  const commentModalRef = useRef();
   const commentForm = useRef();
+  useClickOutSide(() => setShowCommentModal(false), commentModalRef);
 
   return (
     <div
+      ref={commentModalRef}
       className={`fixed inset-0 my-auto mx-auto bg-white dark:bg-zinc-600 h-fit rounded-xl py-4 md:py-6 px-4 space-y-6 shadow-main drop-shadow-md transition-all ease-linear z-40 ${
         showCommentModal
           ? 'opacity-100 w-2/3 sm:w-2/4 md:w-1/2 lg:w-[400px] visible '
