@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Breadcrumb from '../components/Ui/Breadcrumb';
-import { BLOGS } from '../BlogsData';
+import { BLOGS } from '../data/BlogsData';
 import { Link, useParams } from 'react-router-dom';
 
 const BlogDetail = () => {
   const { id: blogId } = useParams();
   const [blog, setBlog] = useState(null);
   const [chevronTop, setChevronTop] = useState(0);
-
+  const breadcrumbBlogTitle = useRef();
   useEffect(() => {
     const foundBlog = BLOGS.find(item => item.id === blogId);
     if (foundBlog) {
@@ -76,7 +76,11 @@ const BlogDetail = () => {
             </Link>
           </Breadcrumb>
           <Breadcrumb>
-            <Link to={`/blogs/${id}`} className="whitespace-nowrap">
+            <Link
+              ref={breadcrumbBlogTitle}
+              to={`/blogs/${id}`}
+              className="whitespace-nowrap text-ellipsis"
+            >
               {title}
             </Link>
           </Breadcrumb>

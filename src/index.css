@@ -228,6 +228,15 @@
     image-rendering: pixelated;
     image-resolution: from-image;
   }
+
+  .breadcrumb-title {
+    /* Style for the breadcrumb title */
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Additional styling as needed */
+  }
 }
 /* ------utilities----- */
 @layer utilities {

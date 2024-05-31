@@ -142,11 +142,11 @@ const ProductItem = props => {
         </div>
       </div>
       {/* mobile Ui */}
-      <div className="flex p-2 overflow-hidden bg-white xs:hidden dark:bg-zinc-700 rounded-2xl shadow-main">
+      <div className="flex p-2 overflow-hidden bg-white xs:hidden dark:bg-zinc-700 rounded-2xl shadow-main min-h-[150px]">
         <Link to={`/products/${id}`} className="my-auto">
           <img src={image} alt={title} className="object-cover w-32" />
         </Link>
-        <div className="flex flex-col w-full h-full gap-4">
+        <div className="flex flex-col w-full h-full gap-4 justify-between min-h-[134px]">
           {/* discount and rating */}
           <div className="flex justify-between">
             {isDiscount && (

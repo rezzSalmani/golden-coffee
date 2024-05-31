@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogItem from '../components/blog/BlogItem';
-import { BLOGS } from '../BlogsData';
-const Blog = () => {
+import { BLOGS } from '../data/BlogsData';
+const Blogs = () => {
   return (
     <section>
       <div>
@@ -66,4 +66,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default Blogs;

@@ -1,6 +1,6 @@
 import React from 'react';
 import BlogItem from './BlogItem';
-import { BLOGS } from '../../BlogsData';
+import { BLOGS } from '../../data/BlogsData';
 import { Link } from 'react-router-dom';
 
 const Blogs = () => {

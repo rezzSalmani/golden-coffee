@@ -5,7 +5,7 @@ import AuthContextProvider from './store/AuthContext';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
-import Blog from './pages/Blog';
+import Blogs from './pages/Blogs';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import BlogDetail from './pages/BlogDetail';
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'blogs',
-        element: <Blog />,
+        element: <Blogs />,
       },
       {
         path: 'blogs/:id',

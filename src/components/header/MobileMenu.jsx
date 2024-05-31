@@ -6,18 +6,15 @@ import { useAuthContext } from '../../store/AuthContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
 import { useClickOutSide } from '../../Hooks/useClickOutSide';
-const MobileMenu = forwardRef(function (
-  {
-    setIsCartMobile,
-    setIsMobileMenu,
-    isMobileMenu,
-    isCartMobile,
-    handleSignOut,
-    darkMode,
-    setDarkMode,
-  },
-  ref
-) {
+const MobileMenu = ({
+  setIsCartMobile,
+  setIsMobileMenu,
+  isMobileMenu,
+  isCartMobile,
+  handleSignOut,
+  darkMode,
+  setDarkMode,
+}) => {
   const location = useLocation();
   const [subMenuMobile, setSubMenuMobile] = useState(false);
   const { currentUser } = useAuthContext();
@@ -25,16 +22,12 @@ const MobileMenu = forwardRef(function (
   const mobileMenuRef = useRef();
   useRemoveScroll(isMobileMenu);
   useClickOutSide(() => setIsMobileMenu(false), mobileMenuRef);
-
   useEffect(() => {
     setIsMobileMenu(false);
   }, [location]);
 
   return (
-    <div
-      className=" flex items-center justify-between w-full h-16 px-6 bg-white md:hidden dark:bg-zinc-700 dark:text-white z-30"
-      ref={ref}
-    >
+    <div className=" flex items-center justify-between w-full h-16 px-6 bg-white md:hidden dark:bg-zinc-700 dark:text-white z-30">
       {/* menu hamburger*/}
       <div>
         <span
@@ -58,10 +51,10 @@ const MobileMenu = forwardRef(function (
         {/* mobile menu*/}
         <div
           ref={mobileMenuRef}
-          className={`fixed space-y-4 xs:space-y-6 p-4 top-0 right-0 bg-white h-screen  divide-y divide-zinc-200 dark:divide-gray-100/10 dark:bg-zinc-700 transition-all z-30 overflow-y-auto ${
+          className={`fixed space-y-4 xs:space-y-6 p-4 top-0 right-0 bg-white h-screen divide-y divide-zinc-200 dark:divide-gray-100/10 dark:bg-zinc-700 transition-all ease-linear z-30 overflow-y-auto ${
             isMobileMenu
-              ? 'w-2/3 xs:w-3/6 sm:w-2/5 visible opacity-100'
-              : 'w-0 invisible opacity-0'
+              ? 'w-2/3 xs:w-3/6 sm:w-2/5 opacity-100 visible'
+              : 'w-0 opacity-0 invisible'
           }`}
         >
           {/* menu header */}
@@ -379,6 +372,6 @@ const MobileMenu = forwardRef(function (
       </div>
     </div>
   );
-});
+};
 
 export default MobileMenu;
