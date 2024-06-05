@@ -43,6 +43,7 @@ export default {
         },
       },
       backgroundImage: {
+        'main': 'url(/images/body-bg.png)',
         'home-mobile': 'url(/images/headerBgMobile.webp)',
         'home-desktop': 'url(/images/headerBgDesktop.webp)',
         'shopBg': 'url(/images/shopBg.jpg)',

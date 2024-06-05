@@ -80,19 +80,19 @@ const Header = () => {
                   {/* subMenu */}
                   <ul className="absolute top-10 right-0 space-y-4 text-zinc-700 dark:text-white p-4 bg-white dark:bg-zinc-700 w-52 child:child-hover:text-orange-300 child:transition-all child:child:transition-all rounded-2xl border-t-[3px] border-t-[#FAB873] text-base  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75">
                     <li>
-                      <Link to="/">قهوه روبوستا</Link>
+                      <Link to="/products/64">قهوه روبوستا</Link>
                     </li>
                     <li>
-                      <Link to="/"> قهوه عربیکا</Link>
+                      <Link to="/products/66"> قهوه عربیکا</Link>
                     </li>
                     <li>
-                      <Link to="/">قهوه آمورا</Link>
+                      <Link to="/products/68">قهوه آمورا</Link>
                     </li>
                     <li>
-                      <Link to="/"> قهوه اتیوپی</Link>
+                      <Link to="/products/72"> قهوه اتیوپی</Link>
                     </li>
                     <li>
-                      <Link to="/"> قهوه لاوازا</Link>
+                      <Link to="/products/60"> قهوه لاوازا</Link>
                     </li>
                     <li>
                       <Link to="/">لوازم و تجهیزات</Link>
