@@ -14,7 +14,11 @@ const NewestProducts = () => {
   const newestProducts = useRef();
 
   return (
-    <section id="newest-products" ref={newestProducts}>
+    <section
+      id="newest-products"
+      ref={newestProducts}
+      className="backGroundImage"
+    >
       <div className="container pt-4 md:pt-32 lg:pt-48">
         {/* section title */}
         <div className="space-y-2 text-zinc-700 dark:text-white md:space-y-4">

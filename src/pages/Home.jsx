@@ -11,7 +11,7 @@ import Services from '../components/services/Services';
 
 const Home = () => {
   return (
-    <div className="backGroundImage">
+    <div>
       <Landing />
       <NewestProducts />
       <ProductBanner />
