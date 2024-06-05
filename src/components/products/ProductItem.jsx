@@ -62,7 +62,7 @@ const ProductItem = props => {
               loading="lazy"
               src={image}
               alt="Product Image"
-              className="image-hover xs:h-32 xs:w-32 md:w-44 md:h-44 xl:w-[260px] xl:h-[257px] object-cover mx-auto transition-all hover:scale-105 duration-300"
+              className="image-md:hover xs:h-32 xs:w-32 md:w-44 md:h-44 xl:w-[260px] xl:h-[257px] object-cover mx-auto transition-all md:hover:scale-105 duration-300"
             />
           </Link>
         </div>
@@ -100,7 +100,7 @@ const ProductItem = props => {
           <div className="flex items-center h-5 gap-1 text-gray-400 xs:gap-2 md:h-auto">
             {isAvailable ? (
               <span
-                className="p-1 transition-colors rounded-full hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 hover:text-white"
+                className="p-1 transition-colors rounded-full md:hover:bg-teal-600 dark:bg-zinc-800 dark:md:hover:bg-emerald-500 md:hover:text-white"
                 onClick={handleAddToCart}
               >
                 <svg
@@ -120,7 +120,7 @@ const ProductItem = props => {
             ) : (
               ''
             )}
-            <span className="transition-colors hover:text-teal-600">
+            <span className="transition-colors md:hover:text-teal-600">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -190,7 +190,7 @@ const ProductItem = props => {
               )}
             </div>
             <div className="flex flex-col items-center justify-end h-5 gap-1 text-gray-400 xs:gap-2 ">
-              <span className="block transition-colors hover:text-teal-600">
+              <span className="block transition-colors md:hover:text-teal-600">
                 <svg
                   fill="none"
                   viewBox="0 0 24 24"
@@ -207,7 +207,7 @@ const ProductItem = props => {
               </span>
               {isAvailable ? (
                 <span
-                  className="block p-1 transition-colors rounded-full hover:bg-teal-600 dark:bg-zinc-800 dark:hover:bg-emerald-500 hover:text-white"
+                  className="block p-1 transition-colors rounded-full md:hover:bg-teal-600 dark:bg-zinc-800 dark:md:hover:bg-emerald-500 md:hover:text-white"
                   onClick={handleAddToCart}
                 >
                   <svg

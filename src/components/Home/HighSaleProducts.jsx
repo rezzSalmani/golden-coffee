@@ -62,7 +62,7 @@ const HighSaleProducts = () => {
             {/* custom keys */}
             <span
               onClick={() => slider?.current?.slickPrev()}
-              className="hover:bg-gray-300 hover:text-zinc-700 transition-colors rounded-full p-1 md:p-2 dark:bg-zinc-700 dark:hover:bg-white bg-white "
+              className="md:hover:bg-gray-300 md:hover:text-zinc-700 transition-colors rounded-full p-1 md:p-2 dark:bg-zinc-700 dark:md:hover:bg-white bg-white "
             >
               <svg
                 fill="none"
@@ -80,7 +80,7 @@ const HighSaleProducts = () => {
             </span>
             <span
               onClick={() => slider?.current?.slickNext()}
-              className="hover:bg-gray-300 hover:text-zinc-700 transition-colors rounded-full p-1 md:p-2 dark:bg-zinc-700 dark:hover:bg-white bg-white "
+              className="md:hover:bg-gray-300 md:hover:text-zinc-700 transition-colors rounded-full p-1 md:p-2 dark:bg-zinc-700 dark:md:hover:bg-white bg-white "
             >
               <svg
                 fill="none"

@@ -35,7 +35,7 @@ const Blogs = () => {
             </svg>
           </span>
           {/* arrow down */}
-          <div className="absolute bottom-0 right-0 left-0 mx-auto w-[30px] h-[30px] hidden md:flex-all dark:text-white text-zinc-700 translate-y-2/4 border-2 rounded-full border-orange-300 cursor-pointer">
+          <div className="absolute bottom-0 right-0 left-0 mx-auto w-[30px] h-[30px] hidden md:flex-all dark:text-white text-zinc-700 translate-y-2/4 border-2 rounded-full border-orange-300 ">
             <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path
                 fillRule="evenodd"

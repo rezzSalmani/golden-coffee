@@ -5,7 +5,6 @@ import MobileMenu from './MobileMenu';
 import DesktopMenuCart from './DesktopMenuCart';
 import UserAuthForm from './UserAuthForm';
 import { toast } from 'react-toastify';
-
 import { useClickOutSide } from '../../Hooks/useClickOutSide';
 import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
 const Header = () => {
@@ -18,7 +17,8 @@ const Header = () => {
 
   const { currentUser, authFormOpen, setAuthFormIsOpen, signOut, isLoading } =
     useAuthContext();
-  const handleSignOut = async () => {
+  const handleSignOut = () => {
+    setUserProfileMenu(false);
     signOut();
   };
   useClickOutSide(() => setUserProfileMenu(false), userProfileRef);
@@ -78,7 +78,7 @@ const Header = () => {
                     فروشگاه
                   </NavLink>
                   {/* subMenu */}
-                  <ul className="absolute top-10 right-0 space-y-4 text-zinc-700 dark:text-white p-4 bg-white dark:bg-zinc-700 w-52 child:child-hover:text-orange-300 child:transition-all child:child:transition-all rounded-2xl border-t-[3px] border-t-[#FAB873] text-base  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75">
+                  <ul className="absolute top-10 right-0 space-y-4 text-zinc-700 dark:text-white p-4 bg-white dark:bg-zinc-700 w-52 child-hover:text-orange-300 child:transition-all child:ease-linear child:delay-75 rounded-2xl border-t-[3px] border-t-[#FAB873] text-base  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75">
                     <li>
                       <Link to="/products/64">قهوه روبوستا</Link>
                     </li>
@@ -306,6 +306,7 @@ const Header = () => {
         isCartMobile={isCartMobile}
         darkMode={darkMode}
         setDarkMode={setDarkMode}
+        handleSignOut={handleSignOut}
       />
       {/* overlay */}
       <div

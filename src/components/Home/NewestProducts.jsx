@@ -27,7 +27,7 @@ const NewestProducts = () => {
             </span>
             <Link
               to="/products"
-              className="flex items-center p-1 text-orange-300 transition-colors rounded-lg cursor-pointer hover:bg-orange-200/10 md:text-xl"
+              className="flex items-center p-1 text-orange-300 transition-colors rounded-lg cursor-pointer md:hover:bg-orange-200/10 md:text-xl"
             >
               مشاهده همه
               <span className="hidden mr-1 md:inline-block"> محصولات </span>
@@ -72,7 +72,7 @@ const NewestProducts = () => {
                 if (!showAllProducts)
                   newestProducts.current.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-2 rounded-lg w-fit bg-gradient-to-r text-zinc-800 from-orange-300 to-orange-200 dark:hover:bg-orange-300/10"
+              className="px-6 py-2 rounded-lg w-fit bg-gradient-to-r text-zinc-800 from-orange-300 to-orange-200 dark:md:hover:bg-orange-300/10"
             >
               {showAllProducts ? 'مشاهده همه' : 'مخفی کردن'}
             </button>

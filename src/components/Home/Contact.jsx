@@ -23,7 +23,7 @@ const Contact = () => {
             امتحان کنند. فضای داخلی شیک و کارکنان خوش برخورد ما روز شما را می
             سازد!
           </p>
-          <button className="flex-all gap-2 w-fit py-2.5 px-3 lg:py-4 lg:px-6 text-orange-300 border-2 text-sm md:text-xl font-DanaMedium border-orange-300 rounded-[100px] hover:bg-gradient-to-r from-orange-300 to-orange-400 hover:text-zinc-700 transition-all active:scale-95 active:-translate-y-1">
+          <button className="flex-all gap-2 w-fit py-2.5 px-3 lg:py-4 lg:px-6 text-orange-300 border-2 text-sm md:text-xl font-DanaMedium border-orange-300 rounded-[100px] md:hover:bg-gradient-to-r from-orange-300 to-orange-400 md:hover:text-zinc-700 transition-all active:scale-95 active:-translate-y-1">
             <svg
               fill="none"
               viewBox="0 0 24 24"

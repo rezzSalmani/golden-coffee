@@ -1,7 +1,7 @@
 import React from 'react';
 const Landing = () => {
   return (
-    <section className="home relative h-[250px] xs:h-auto w-full aspect-[2/1] md:aspect-auto bg-home-mobile md:bg-home-desktop bg-no-repeat bg-cover bg-[center_top]">
+    <section className="home relative min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen w-full aspect-[2/1] md:aspect-auto bg-home-mobile md:bg-home-desktop bg-no-repeat bg-cover bg-[center_top]">
       <div className="container relative flex items-center justify-end h-full overflow-y-hidden  md:min-h-screen ">
         <div className=" text-white sm:space-y-4 md:space-y-8   justify-center ">
           <div className="">

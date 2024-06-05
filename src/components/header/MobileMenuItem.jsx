@@ -11,7 +11,7 @@ const MobileMenuItem = ({
   return (
     <div className={`flex w-full flex-col ${chevronDown ? '' : ''}`}>
       <li
-        className={`relative flex justify-between items-center child:flex child:py-2 w-full h-full  transition-all `}
+        className={`relative flex justify-between items-center child:flex child:py-2 w-full h-full  transition-all`}
       >
         <NavLink
           to={path}

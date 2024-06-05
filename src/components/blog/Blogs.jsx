@@ -15,7 +15,7 @@ const Blogs = () => {
         </h4>
         <Link
           to="/blogs"
-          className="flex items-center hover:bg-orange-200/10 transition-colors rounded-lg p-1 text-orange-300  md:text-xl cursor-pointer"
+          className="flex items-center md:hover:bg-orange-200/10 transition-colors rounded-lg p-1 text-orange-300  md:text-xl cursor-pointer"
         >
           مشاهده همه <span className="hidden sm:block mr-1">مطالب</span>
           <svg

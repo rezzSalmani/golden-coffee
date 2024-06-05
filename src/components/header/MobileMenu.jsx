@@ -6,6 +6,7 @@ import { useAuthContext } from '../../store/AuthContext';
 import { Link, useLocation } from 'react-router-dom';
 import { useRemoveScroll } from '../../Hooks/useRemoveScroll';
 import { useClickOutSide } from '../../Hooks/useClickOutSide';
+import LogOutModal from './LogOutModal';
 const MobileMenu = ({
   setIsCartMobile,
   setIsMobileMenu,
@@ -17,6 +18,7 @@ const MobileMenu = ({
 }) => {
   const location = useLocation();
   const [subMenuMobile, setSubMenuMobile] = useState(false);
+  const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
   const { currentUser } = useAuthContext();
   const { setAuthFormIsOpen } = useAuthContext();
   const mobileMenuRef = useRef();
@@ -70,7 +72,7 @@ const MobileMenu = ({
               className="w-16 xs:w-auto"
             />
             <span
-              className="hover:bg-orange-200/30 transition-colors dark:text-white rounded-full cursor-pointer p-1"
+              className="md:hover:bg-orange-200/30 transition-colors dark:text-white rounded-full cursor-pointer p-1"
               onClick={() => setIsMobileMenu(prev => !prev)}
             >
               <svg
@@ -155,7 +157,8 @@ const MobileMenu = ({
               {/* submenu as children */}
               <div
                 className={`flex flex-col gap-3 w-full pr-7 text-sm
-               child-hover:submenu__item--active child:duration-200
+               md:child-hover:submenu__item--active child:duration-200
+               child:ease-linear
                 child:transition-all  child:w-fit transition-all duration-200  ${
                   subMenuMobile
                     ? 'h-full opacity-100 visible mt-2 translate-y-1 pb-2'
@@ -233,7 +236,10 @@ const MobileMenu = ({
             {currentUser ? (
               <button
                 className="flex items-center cursor-pointer"
-                onClick={handleSignOut}
+                onClick={() => {
+                  setLogoutModalOpen(true);
+                  setIsMobileMenu(false);
+                }}
               >
                 <svg
                   fill="none"
@@ -337,7 +343,7 @@ const MobileMenu = ({
         </div>
       </div>
       {/* logo mobile */}
-      <div className="cursor-pointer flex items-center justify-center ">
+      <div className="cursor-pointer flex items-center justify-center">
         <img
           src="/images/svgs/app-logo-type.svg"
           alt="mobile logo"
@@ -370,6 +376,11 @@ const MobileMenu = ({
           isCartMobile={isCartMobile}
         />
       </div>
+      <LogOutModal
+        isLogoutModalOpen={isLogoutModalOpen}
+        setLogoutModalOpen={setLogoutModalOpen}
+        handleSignOut={handleSignOut}
+      />
     </div>
   );
 };

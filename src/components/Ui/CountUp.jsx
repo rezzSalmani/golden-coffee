@@ -13,7 +13,7 @@ const CountUp = ({ start = 0, end, ...props }) => {
       setValue(result);
       ref.current = result;
     }
-    setTimeout(Count, 100);
+    setTimeout(Count, 50);
   };
 
   useEffect(() => {

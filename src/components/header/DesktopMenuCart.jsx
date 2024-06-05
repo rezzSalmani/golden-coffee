@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../store/AuthContext';
 import { Link } from 'react-router-dom';
 import { calculateTotalPrice } from '../../utility/priceCalc';
+import { toast } from 'react-toastify';
 const DesktopMenuCart = () => {
   const { isLoading, removeFromCart, addToCart, userCart } = useAuthContext();
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -119,7 +120,10 @@ const DesktopMenuCart = () => {
                     <span className="text-sm font-DanaBold"> تومان </span>
                   </span>
                 </div>
-                <button className="w-[144px] h-[56px] text-white text-xl bg-teal-600 hover:bg-teal-700 transition-all rounded-xl">
+                <button
+                  onClick={() => toast.error('خرید در دسترس نمیباشد!')}
+                  className="w-[144px] h-[56px] text-white text-xl bg-teal-600 md:hover:bg-teal-700 transition-all rounded-xl"
+                >
                   ثبت سفارش
                 </button>
               </div>

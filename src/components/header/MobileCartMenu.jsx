@@ -20,7 +20,7 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
   return (
     <div
       ref={cartMobileRef}
-      className={`fixed left-0 top-0 bottom-0 min-h-screen flex flex-col bg-white divide-y divide-white/10 dark:bg-zinc-700 transition-all ease-linear z-30 overflow-y-auto text-zinc-700 dark:text-white py-3 px-4 ${
+      className={`fixed left-0 top-0 bottom-0 min-h-[90vh] flex flex-col bg-white divide-y divide-white/10 dark:bg-zinc-700 transition-all ease-linear duration-150 z-30 overflow-y-auto text-zinc-700 dark:text-white py-3 px-4 ${
         isCartMobile
           ? 'w-full xs:w-3/5 sm:w-2/4 visible opacity-100'
           : 'w-0 opacity-0 invisible'
@@ -98,7 +98,10 @@ const MobileCartMenu = ({ setIsCartMobile, isCartMobile }) => {
       {/* cart footer */}
       <div className="py-6 mt-auto xs:py-8">
         <div className="flex flex-wrap items-center gap-2 justify-evenly">
-          <button className="py-2.5 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-xl">
+          <button
+            onClick={() => toast.error('خرید در دسترس نمیباشد!')}
+            className="py-2.5 px-4 bg-teal-600 md:hover:bg-teal-700 text-white rounded-xl"
+          >
             ثبت سفارش
           </button>
           <div className="child:block">

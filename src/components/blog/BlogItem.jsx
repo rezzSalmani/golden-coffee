@@ -15,7 +15,7 @@ const BlogItem = ({ id, title, image, month, year, day }) => {
             alt="Blog Image"
             className="h-full w-full object-cover "
           />
-          <div className="invisible absolute inset-0 w-full h-full flex-all opacity-0 group-hover:opacity-100 group-hover:visible  bg-gradient-to-r from-orange-200/80 to-orange-300/80 transition-all delay-100 duration-200 ">
+          <div className="invisible absolute inset-0 w-full h-full flex-all opacity-0 group-hover:opacity-100 group-hover:visible bg-gradient-to-r from-orange-200/80 to-orange-300/80 transition-all delay-100 duration-200 ">
             <span className="flex-all w-[64px] md:w-full text-amber-900">
               <svg
                 width="136"
@@ -40,7 +40,7 @@ const BlogItem = ({ id, title, image, month, year, day }) => {
         </Link>
       </div>
       <div className="flex items-start md:items-start justify-between flex-col md:flex-row w-full divide-white/10 divide-y md:divide-none px-2">
-        <h6 className="text-sm md:text-lg text-zinc-700 dark:text-white line-clamp-2 md:w-4/5 text-right pl-2">
+        <h6 className="text-sm md:text-base xl:text-lg text-zinc-700 dark:text-white line-clamp-2 md:w-4/5 text-right pl-2">
           <Link to={`/blogs/${id}`}>{title}</Link>
         </h6>
         <span className="hidden md:block w-px h-[60px] bg-gray-100 dark:bg-white/10 "></span>
