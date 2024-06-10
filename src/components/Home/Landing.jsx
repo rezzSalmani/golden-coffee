@@ -1,18 +1,18 @@
 import React from 'react';
 const Landing = () => {
   return (
-    <section className="home relative min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen w-full aspect-[2/1] md:aspect-auto bg-home-mobile md:bg-home-desktop bg-no-repeat bg-cover bg-[center_top]">
-      <div className="container relative flex items-center justify-end h-full overflow-y-hidden  md:min-h-screen ">
-        <div className=" text-white sm:space-y-4 md:space-y-8   justify-center ">
-          <div className="">
-            <h1 className="font-MorabbaBold text-xl sm:text-2xl md:text-6xl/[62px] mb-0.5 md:mb-2">
+    <section className="home relative h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen w-full bg-home-mobile md:bg-home-desktop bg-no-repeat bg-cover bg-[center_top]">
+      <div className="container relative flex justify-end sm:pl-20  h-full overflow-y-hidden lg:min-h-screen text-white">
+        <div className="flex flex-col justify-center items-start sm:space-y-4 md:space-y-8   ">
+          <div>
+            <h1 className="font-MorabbaBold text-xl sm:text-2xl md:text-4xl lg:text-6xl/[62px] mb-0.5 md:mb-2">
               قهوه عربیکا تانزانیا
             </h1>
-            <h4 className="font-MorabbaLight sm:text-xl md:text-5xl/[64px]">
+            <h4 className="font-MorabbaLight sm:text-xl md:text-3xl lg:text-5xl/[64px]">
               یک فنجان بالانس !
             </h4>
           </div>
-          <span className="block h-px md:h-0.5 w-[100px] bg-orange-300 my-3 md:my-8"></span>
+          <span className="block h-px md:h-0.5 w-[100px] md:w-1/2 bg-orange-300 my-3 md:my-8"></span>
           <p className="max-w-[201px] md:max-w-[460px] text-xs md:text-base lg:text-2xl">
             قطعا نام آشنای عربیکا را شنیده اید، عربیکا یکی از گونه های قهوه است
             که در نواحی مختلف کمربند قهوه کشت میشود.

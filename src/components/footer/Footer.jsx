@@ -1,10 +1,11 @@
-import React from 'react';
-
+import React from "react";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-zinc-700 space-y-4 text-gray-300 gap-4 xl:gap-8 py-8 md:py-14 px-6 xl:px-20 font-Dana">
+    <footer className="flex flex-wrap lg:flex-nowrap items-center justify-center bg-zinc-700 space-y-4 text-gray-300 gap-6 xl:gap-8 py-8 md:py-14 px-6 xl:px-20 font-Dana w-full child:lg:w-1/3">
+      {/* grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 */}
       {/* first section */}
-      <div className="flex items-center text-justify flex-col gap-4 ">
+      <div className="flex items-center text-justify flex-col gap-4">
         <span className="w-20 md:w-[118px] md:h-[48px] text-orange-300">
           <svg
             id="logo-type"
@@ -25,7 +26,7 @@ const Footer = () => {
             <path d="M86.4542 30.4589C86.4964 34.4703 86.6654 38.1366 86.7498 38.6542C86.961 39.6462 87.0877 39.6462 92.9155 39.6462H98.8278L99.4613 38.1366C100.264 36.1093 100.264 36.1093 98.5322 36.8426C96.674 37.619 93.1267 37.7052 92.5777 36.9288C92.3665 36.6701 92.2398 35.7211 92.282 34.9016C92.3243 34.0821 92.4087 33.1331 92.4087 32.8312C92.451 32.4861 93.1689 32.3136 94.5203 32.3136C96.674 32.3136 97.8143 31.5372 97.392 30.4157C97.223 29.9844 96.3784 29.7256 94.6892 29.6393L92.2398 29.5099L92.1131 27.9571C91.9442 25.7142 92.7044 25.1966 95.4494 25.8005C97.392 26.2318 97.6876 26.1887 98.1944 25.5417C98.5322 25.1104 98.7434 24.4634 98.6589 24.1183C98.5744 23.6007 97.4764 23.4713 92.451 23.3419L86.3275 23.2125L86.4542 30.4589Z"></path>
           </svg>
         </span>
-        <p className="text-sm md:text-base text-center  xs:px-14 md:px-0">
+        <p className="text-sm md:text-base xl:text-lg text-justify xs:px-14 md:px-0 w-full md:w-1/2 lg:w-full">
           ما برآنیم تا با پیشرو بودن در فرآیند تولید، نوع و کیفیت محصول، خدمات و
           توزیع، الگویی برای تولیدکنندگان ایرانی باشیم و به مرجع فرهنگ قهوه در
           ایران تبدیل شویم. می‌پنداریم که نظر مردم ایران و منطقه باید نسبت به
@@ -34,71 +35,74 @@ const Footer = () => {
       </div>
       {/* second section */}
       <div className="flex flex-col gap-3 md:gap-4 items-center justify-center">
-        <h6 className="text-white font-DanaMedium ">دسترسی سریع</h6>
-        <div className="flex items-center justify-center gap-3 md:gap-6 xl:gap-6 xl:text-lg">
+        <h6 className="text-white font-DanaMedium text-lg md:text-xl">
+          دسترسی سریع
+        </h6>
+        <div className="flex items-center justify-center gap-3 md:gap-6 xl:gap-6 text-sm sm:text-base xl:text-lg xs:text-nowrap">
           <div className="child:flex child:items-center space-y-2 child:gap-2 child-hover:text-orange-300 child:transition-colors">
-            <a href="#">
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               حریم خصوصی
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               عودت کالا
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               شرایط استفاده
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               ثبت سفارش
-            </a>
+            </Link>
           </div>
           <div className="child:flex child:items-center space-y-2 child:gap-2 child-hover:text-orange-300 child:transition-colors">
-            <a href="#">
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               پرسش های متداول
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               فرصت های شغلی
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               ضمانت نامه ها
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/">
               <span className="block w-2.5 h-1 rounded-3xl bg-gray-300"></span>
               ارتباط با ما
-            </a>
+            </Link>
           </div>
-          <div className=""></div>
         </div>
       </div>
       {/* third section */}
-      <div className="flex flex-col md:gap-2 justify-center text-center gap-4 text-xl">
+      <div className="flex flex-col gap-2 md:gap-4 justify-center items-center text-center ">
         <h6 className="text-lg md:text-xl text-white">در تماس باشیم</h6>
-        <span className="flex child:flex md:items-start gap-1 justify-center text-xs sm:text-sm">
-          <svg
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 md:w-5 h-4 md:h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-            />
-          </svg>
+        <div className="flex child:w-fit items-start gap-1 justify-center text-sm lg:text-base">
+          <span>
+            <svg
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 md:w-5 h-4 md:h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+              />
+            </svg>
+          </span>
           <span> بلوار میرداماد، خیابان البرز، کوچه قبادیان شرقی، پلاک ۳۳</span>
-        </span>
+        </div>
         <div className="flex w-full gap-2 flex-wrap justify-center items-center child:flex child:gap-2  child:justify-center text-sm font-DanaMedium ">
           <span className="text-orange-300">
             <svg
@@ -133,7 +137,7 @@ const Footer = () => {
             0902-123-6628 &nbsp; 021-6789012
           </span>
         </div>
-        <div className="flex flex-wrap justify-center items-center gap-2 xl:gap-4 text-xs md:text-base font-DanaMedium text-orange-300 fill-orange-300 child:flex-all child:gap-1 child:border child:border-orange-200 child:rounded-2xl">
+        <div className="flex flex-wrap justify-center items-center gap-2 xl:gap-4 text-xs md:text-sm font-DanaMedium text-orange-300 fill-orange-300 child:flex-all child:gap-1 child:border child:border-orange-200 child:rounded-2xl">
           <button className=" px-2 py-1 hover:bg-gradient-to-r from-orange-300 hover:fill-zinc-800 to-orange-200 hover:text-zinc-800 transition-all ">
             <svg
               width="22"

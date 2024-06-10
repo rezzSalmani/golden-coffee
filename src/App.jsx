@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createPortal } from 'react-dom';
 import AuthContextProvider from './store/AuthContext';
 import Layout from './components/layout/Layout';
 import Home from './pages/Home';
@@ -11,8 +13,7 @@ import ContactUs from './pages/ContactUs';
 import BlogDetail from './pages/BlogDetail';
 import ProductDetail from './pages/ProductDetail';
 import ProductContextProvider from './store/ProductContext';
-import NotFound from './components/notFound/NotFound';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -60,16 +61,20 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ProductContextProvider>
         <AuthContextProvider>
-          <ToastContainer
-            rtl
-            transition={Slide}
-            autoClose={2000}
-            closeOnClick={true}
-            draggable={true}
-            theme={
-              localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light'
-            }
-          />
+          {createPortal(
+            <ToastContainer
+              rtl
+              transition={Slide}
+              autoClose={2000}
+              closeOnClick={true}
+              draggable={true}
+              theme={
+                localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light'
+              }
+            />,
+            document.getElementById('toastify')
+          )}
+
           <RouterProvider router={router}></RouterProvider>
         </AuthContextProvider>
       </ProductContextProvider>

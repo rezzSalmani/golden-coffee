@@ -44,6 +44,7 @@ const Header = () => {
   return (
     <div className="relative">
       {/* Authorization Form */}
+
       <UserAuthForm />
       {/* Menu desktop */}
       <header className="fixed top-0 left-0 right-0 z-30 md:mx-8 lg:mx-14 xl:mx-24 md:pt-8">

@@ -32,7 +32,7 @@ const ProductDetail = () => {
       <div className="space-y-5 md:space-y-10">
         {/* Breadcrumb */}
         <div className="md:pt-[10%]">
-          <div className=" flex h-7 md:h-12 items-center overflow-hidden rounded-xl border border-slate-200 dark:border-none bg-white dark:bg-zinc-700 shadow-main ">
+          <div className=" flex h-7 md:h-12 items-center overflow-hidden rounded-xl border border-slate-200 dark:border-none bg-white dark:bg-zinc-700 shadow-main">
             <Breadcrumb>
               <Link to={'/'} className="cursor-pointer">
                 <svg
@@ -57,24 +57,38 @@ const ProductDetail = () => {
               </Link>
             </Breadcrumb>
             <Breadcrumb>
-              <Link to={'/products'} className="whitespace-nowrap">
-                {data?.category}
-              </Link>
+              {data ? (
+                <Link to={'/products'} className="whitespace-nowrap">
+                  {data?.category || '....'}
+                </Link>
+              ) : (
+                <span>...</span>
+              )}
             </Breadcrumb>
             <Breadcrumb>
-              <Link to={`/products/${data?.id}`} className="whitespace-nowrap">
-                {data?.title}
-              </Link>
+              {data ? (
+                <Link to={`/products/${data?.id}`} className="line-clamp-1">
+                  {data?.title || '...'}
+                </Link>
+              ) : (
+                <span>...</span>
+              )}
             </Breadcrumb>
           </div>
         </div>
         {/* product detail */}
-        {isLoading ? (
-          <SingleProductPreloader />
-        ) : (
+
+        {isLoading && !data && <SingleProductPreloader />}
+        {!isLoading && data && (
           <SingleProductItem data={data} discountedPrice={discountedPrice} />
         )}
-
+        {!isLoading && !data && (
+          <div className="border rounded-xl border-zinc-200 dark:border-zinc-700 shadow-sm">
+            <p className="text-red-500 py-8 text-sm md:text-base font-DanaBold text-center w-full">
+              دریافت اطلاعات موفقیت آمیز نبود. لطفا بعدا تلاش کنید.
+            </p>
+          </div>
+        )}
         {/* comment section */}
         <div className="bg-white dark:bg-zinc-700 text-zinc-800 dark:text-white p-5 rounded-xl shadow-main">
           <div className="flex items-center gap-2 justify-between">

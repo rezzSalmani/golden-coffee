@@ -95,7 +95,7 @@ const Shop = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
     <section>
-      <div className="relative bg-shopBg w-full bg-no-repeat bg-cover bg-top min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen aspect-[2/1] md:aspect-auto overflow-hidden md:custom-radius">
+      <div className="relative bg-shopBg w-full bg-no-repeat bg-cover bg-top min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen overflow-hidden md:custom-radius">
         {/* overlay */}
         <div className="absolute inset-0 z-0 transition-all bg-black bg-opacity-20"></div>
         {/* texts */}

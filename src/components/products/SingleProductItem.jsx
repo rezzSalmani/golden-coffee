@@ -11,11 +11,12 @@ const SingleProductItem = ({ data, discountedPrice }) => {
           </h3>
           <div className="flex flex-col text-center">
             <span className="text-sm sm:text-base xl:text-lg font-DanaBold">
-              {discountedPrice}
-              <span className="text-xs md:text-sm">تومان</span>
+              {discountedPrice?.toLocaleString()}
+              <span className="text-xs md:text-sm pr-1">تومان</span>
             </span>
             <span className="line-through text-xs md:text-sm text-gray-500">
-              {data?.price} <span className="text-xs md:text-sm">تومان</span>
+              {data?.price.toLocaleString()}{' '}
+              <span className="text-xs md:text-sm">تومان</span>
             </span>
           </div>
         </div>
@@ -24,12 +25,8 @@ const SingleProductItem = ({ data, discountedPrice }) => {
         </p>
         <StarRating initStar={3} />
       </div>
-      <div className="flex justify-center h-full w-2/5 lg:w-1/2">
-        <img
-          src={data?.image}
-          alt={data?.title}
-          className="drop-shadow-xl max-w-[300px] max-h-[300px]"
-        />
+      <div className="flex justify-center h-full max-w-[400px] max-h-[400px]">
+        <img src={data?.image} alt={data?.title} className="drop-shadow-xl " />
       </div>
     </div>
   );

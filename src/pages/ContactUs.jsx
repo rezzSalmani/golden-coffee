@@ -1,11 +1,17 @@
 import React from 'react';
 import Contact from '../components/Home/Contact';
+import { toast } from 'react-toastify';
 const ContactUs = () => {
+  const handleSubmit = event => {
+    event.preventDefault();
+    event.target.reset();
+    toast.success('پیام شما ارسال شد.');
+  };
   return (
     <section>
       <div>
         {/* landing */}
-        <div className="bg-contactUsBg relative w-full bg-no-repeat bg-bottom bg-cover min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen aspect-[2/1] md:aspect-auto overflow-hidden md:custom-radius">
+        <div className="bg-contactUsBg relative w-full bg-no-repeat bg-bottom bg-cover min-h-[322px] xs:h-[423px] sm:h-[495px] md:h-[567px] lg:h-screen overflow-hidden md:custom-radius">
           {/* overlay */}
           <div className="absolute inset-0 z-0 transition-all bg-black bg-opacity-30"></div>
           {/* texts */}
@@ -49,11 +55,7 @@ const ContactUs = () => {
             باشید.
           </h6>
           <form
-            action=""
-            onSubmit={e => {
-              e.preventDefault();
-              e.target.reset();
-            }}
+            onSubmit={handleSubmit}
             className="text-zinc-800 dark:text-white space-y-6 md:px-4 w-full"
           >
             <div className="flex flex-col text-sm xs:text-base md:text-lg space-y-2 child:w-full">
