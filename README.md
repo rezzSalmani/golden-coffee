@@ -130,7 +130,7 @@ DESCRIPTION
 ### Technologies Used
 
 - React: A powerful JavaScript library for building user interfaces.
-- Redux: A predictable state container for managing the application's state.
+- React Query: It makes fetching, caching, synchronizing and updating server state in your web applications a breeze.
 - Tailwind CSS: A utility-first CSS framework for rapid UI development.
 - React Router: A routing library for React, providing client-side routing and navigation.
 
