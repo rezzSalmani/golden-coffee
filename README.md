@@ -20,8 +20,9 @@
 
   <p align="center">
       <strong>Online Coffee Shop</strong>
+    
+<!--DESCRIPTION.................. -->
 
-DESCRIPTION
 <br />
 <a href="https://github.com/rezzSalmani/golden-coffee"><strong>Explore the docs »</strong></a>
 <br />
